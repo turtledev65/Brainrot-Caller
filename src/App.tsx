@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Call from "./components/call";
 
 function App() {
   const [isCalling, setIsCalling] = useState(true);
+  const templates = useMemo(() => {
+    return {};
+  }, []);
 
   return (
     <>
-      <p className="px-4 font-bold  text-blue-500 bg-white text-3xl">
-        Hello World
-      </p>
+      <h1 className="text-4xl font-bold text-center py-2">Fake Caller</h1>
+      <div className="grid-cols-2"></div>
       <Call
-        callerName="Name"
-        callerIcon="https://avatars.githubusercontent.com/u/102061951?v=4&size=64"
+        name="Name"
+        icon="https://avatars.githubusercontent.com/u/102061951?v=4&size=64"
         isCalling={isCalling}
         onRejectCall={() => setIsCalling(false)}
       />

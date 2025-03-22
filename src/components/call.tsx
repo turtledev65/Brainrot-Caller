@@ -2,33 +2,25 @@ import {
   MdOutlineCall as CallAnswerIcon,
   MdOutlineCallEnd as CallEndIcon,
 } from "react-icons/md";
+import { Caller } from "../types";
 
-type Props = {
+type Props = Caller & {
   isCalling: boolean;
   onRejectCall?: () => void;
   onAnswerCall?: () => void;
-  callerName: string;
-  callerIcon?: string;
-  background?: string;
 };
 
-const Call = ({
-  isCalling,
-  onRejectCall,
-  onAnswerCall,
-  callerName,
-  callerIcon,
-}: Props) => {
+const Call = ({ isCalling, onRejectCall, onAnswerCall, name, icon }: Props) => {
   return !isCalling ? null : (
     <div className="absolute bg-black inset-0 flex flex-col text-white">
       <div className="flex-1 flex flex-col gap-4 justify-center items-center">
-        {callerIcon && (
+        {icon && (
           <img
-            src={callerIcon}
+            src={icon}
             className="w-sm object-cover bg-white rounded-full p-2"
           />
         )}
-        <p className="text-3xl">{callerName}</p>
+        <p className="text-3xl">{name}</p>
       </div>
       <div className="flex justify-around py-12">
         <button
