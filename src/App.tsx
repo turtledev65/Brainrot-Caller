@@ -1,24 +1,36 @@
-import { useState, useMemo } from "react";
-import defaultGroups from "./data/default-groups";
-import { Group } from "./types";
+import { useContext } from "react";
+import Navbar from "./components/navbar";
+import Providers from "./providers";
+import { GroupsContext } from "./providers/groups-providers";
 
 function App() {
-  const groups = useMemo(() => defaultGroups, []);
-  const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
-
   return (
-    <>
-      <h1 className="text-4xl font-bold text-center py-4">Fake Caller</h1>
-      <div className="grid grid-cols-2 gap-4 p-4">
-        {selectedGroup !== null
-          ? selectedGroup.callers.map((caller) => <Item name={caller.name} />)
-          : groups.map((group) => (
-              <Item onClick={() => setSelectedGroup(group)} name={group.name} />
-            ))}
-      </div>
-    </>
+    <Providers>
+      <Navbar />
+      <GroupGrid />
+    </Providers>
   );
 }
+
+const GroupGrid = () => {
+  const { groups, selectedGroup, selectGroup } = useContext(GroupsContext);
+
+  return (
+    <div className="grid grid-cols-2 gap-4 p-4">
+      {selectedGroup !== null
+        ? selectedGroup.callers.map((caller) => (
+            <Item name={caller.name} key={caller.name} />
+          ))
+        : groups.map((group) => (
+            <Item
+              onClick={() => selectGroup(group)}
+              name={group.name}
+              key={group.name}
+            />
+          ))}
+    </div>
+  );
+};
 
 type ItemProps = {
   name: string;
