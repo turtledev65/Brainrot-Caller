@@ -2,6 +2,7 @@ import { useContext } from "react";
 import Navbar from "./components/navbar";
 import Providers from "./providers";
 import { GroupsContext } from "./providers/groups-providers";
+import { Item, ItemAdd } from "./components/item";
 
 function App() {
   return (
@@ -13,36 +14,27 @@ function App() {
 }
 
 const GroupGrid = () => {
-  const { groups, selectedGroup, selectGroup } = useContext(GroupsContext);
+  const { groups, selectedGroup, selectGroup, addGroup } =
+    useContext(GroupsContext);
 
   return (
     <div className="grid grid-cols-2 gap-4 p-4">
-      {selectedGroup !== null
-        ? selectedGroup.callers.map((caller) => (
-            <Item name={caller.name} key={caller.name} />
-          ))
-        : groups.map((group) => (
+      {selectedGroup !== null ? (
+        selectedGroup.callers.map((caller) => (
+          <Item name={caller.name} key={caller.name} />
+        ))
+      ) : (
+        <>
+          {groups.map((group) => (
             <Item
               onClick={() => selectGroup(group)}
               name={group.name}
               key={group.name}
             />
           ))}
-    </div>
-  );
-};
-
-type ItemProps = {
-  name: string;
-  onClick?: () => void;
-};
-const Item = ({ name, onClick }: ItemProps) => {
-  return (
-    <div
-      onClick={onClick}
-      className="bg-gray-300 h-40 cursor-pointer hover:bg-gray-400 transition-colors rounded-sm p-4 flex justify-center items-center"
-    >
-      <p className="text-lg">{name}</p>
+          <ItemAdd onClick={() => addGroup("Name")} />
+        </>
+      )}
     </div>
   );
 };
