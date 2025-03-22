@@ -10,7 +10,7 @@ export const Item = ({ name, onClick }: ItemProps) => {
   return (
     <div
       onClick={onClick}
-      className="bg-gray-300 h-40 cursor-pointer hover:bg-gray-400 transition-colors text-gray-800 rounded-sm p-4 flex justify-center items-center"
+      className="bg-gray-300 dark:bg-slate-900 dark:hover:bg-slate-950 dark:text-gray-50 h-40 cursor-pointer hover:bg-gray-400 transition-colors text-gray-800 rounded-sm p-4 flex justify-center items-center"
     >
       <p className="text-lg">{name}</p>
     </div>
@@ -44,12 +44,12 @@ export const ItemAdd = ({ onAdd }: ItemAddProps) => {
         <div className="flex h-full justify-center items-center">
           <form
             onSubmit={handleSubmitForm}
-            className="bg-white rounded-sm p-4 flex flex-col items-center gap-2"
+            className="bg-gray-300 dark:bg-slate-900 rounded-sm p-4 flex flex-col items-center gap-2"
           >
             <h2 className="text-2xl py-4">Create</h2>
             <input
               type="text"
-              className="text-lg border-2 border-gray-400 rounded-md outline-none p-1 active:border-gray-500"
+              className="text-lg border-2 border-gray-400  rounded-md outline-none p-1 active:border-gray-500"
               placeholder="Title"
               ref={inputRef}
             />
@@ -75,7 +75,7 @@ export const ItemAdd = ({ onAdd }: ItemAddProps) => {
         onClick={() => {
           setModalActive(true);
         }}
-        className="bg-transparent border-4 text-gray-300 border-gray-300 h-40 cursor-pointer hover:text-gray-800 hover:bg-gray-300 hover:border-gray-300 transition-colors rounded-sm p-4 flex justify-center items-center"
+        className="bg-transparent border-4 text-gray-300 dark:text-slate-900  border-gray-300  dark:border-slate-900  h-40 cursor-pointer hover:text-gray-800 hover:bg-gray-300 dark:hover:bg-slate-900 transition-colors rounded-sm p-4 flex justify-center items-center"
       >
         <AddIcon className="text-4xl" />
       </div>

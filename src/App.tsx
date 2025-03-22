@@ -18,14 +18,14 @@ const GroupGrid = () => {
     useContext(GroupsContext);
 
   return (
-    <div className="grid grid-cols-2 gap-4 p-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
       {selectedGroup !== null ? (
-        selectedGroup.callers.map((caller) => (
+        selectedGroup.callers.map(caller => (
           <Item name={caller.name} key={caller.name} />
         ))
       ) : (
         <>
-          {groups.map((group) => (
+          {groups.map(group => (
             <Item
               onClick={() => selectGroup(group)}
               name={group.name}
@@ -33,7 +33,7 @@ const GroupGrid = () => {
             />
           ))}
           <ItemAdd
-            onAdd={(text) => {
+            onAdd={text => {
               addGroup(text);
             }}
           />

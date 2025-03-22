@@ -6,7 +6,7 @@ const Navbar = () => {
   const { selectedGroup } = useContext(GroupsContext);
 
   return (
-    <nav className="bg-white flex gap-2 px-2">
+    <nav className="bg-gray-300 dark:bg-slate-900 flex gap-2 px-2">
       <BackButton />
       <h1 className="text-4xl font-bold text-center py-4">
         {selectedGroup ? selectedGroup.name : "Fake Caller"}
