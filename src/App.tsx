@@ -32,7 +32,11 @@ const GroupGrid = () => {
               key={group.name}
             />
           ))}
-          <ItemAdd onClick={() => addGroup("Name")} />
+          <ItemAdd
+            onAdd={(text) => {
+              addGroup(text);
+            }}
+          />
         </>
       )}
     </div>
