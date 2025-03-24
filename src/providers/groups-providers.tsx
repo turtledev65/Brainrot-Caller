@@ -28,7 +28,15 @@ const GroupsProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   const addGroup = useCallback((name: string) => {
-    setGroups(prevGroups => [...prevGroups, { name, callers: [] }]);
+    setGroups(prevGroups => {
+      for (const group of prevGroups) {
+        if (group.name === name) {
+          return prevGroups;
+        }
+      }
+
+      return [...prevGroups, { name, callers: [] }];
+    });
   }, []);
 
   return (
