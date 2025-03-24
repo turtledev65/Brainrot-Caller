@@ -9,10 +9,22 @@ type Props = Caller & {
   onAnswerCall?: () => void;
 };
 
-const Call = ({ onRejectCall, onAnswerCall, name, icon }: Props) => {
+const Call = ({
+  onRejectCall,
+  onAnswerCall,
+  name,
+  icon,
+  background,
+}: Props) => {
   return (
     <div className="absolute bg-black inset-0 flex flex-col text-white">
-      <div className="flex-1 flex flex-col gap-4 justify-center items-center">
+      {background && (
+        <div
+          className="absolute inset-0 bg-pink bg-no-repeat bg-cover bg-center"
+          style={{ backgroundImage: `url(${background})` }}
+        />
+      )}
+      <div className="flex-1 z-10 flex flex-col gap-4 justify-center items-center">
         {icon && (
           <img
             src={icon}
@@ -21,7 +33,7 @@ const Call = ({ onRejectCall, onAnswerCall, name, icon }: Props) => {
         )}
         <p className="text-3xl">{name}</p>
       </div>
-      <div className="flex justify-around py-12">
+      <div className="flex z-10 justify-around py-12">
         <button
           onClick={onRejectCall}
           className="bg-red-700 cursor-pointer hover:bg-red-800 p-6 text-3xl rounded-full"
