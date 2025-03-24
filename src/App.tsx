@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { FormEvent, useCallback, useContext, useRef, useState } from "react";
 import Navbar from "./components/navbar";
 import Providers from "./providers";
 import { GroupsContext } from "./providers/groups-providers";
-import { Item, ItemAdd } from "./components/item";
+import { AddItem, Item } from "./components/item";
 import Call from "./components/call";
+import Modal from "./components/modal";
 
 function App() {
   return (
@@ -40,14 +41,67 @@ const GroupGrid = () => {
               key={group.name}
             />
           ))}
-          <ItemAdd
-            onAdd={text => {
-              addGroup(text);
-            }}
-          />
+          <AddGroupItem />
         </>
       )}
     </div>
+  );
+};
+
+const AddGroupItem = () => {
+  const { addGroup } = useContext(GroupsContext);
+  const [isModalActive, setModalActive] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const handleSubmitForm = useCallback((e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!inputRef.current) return;
+    const text = inputRef.current?.value.trim();
+    if (!text || text.length == 0) return;
+
+    addGroup(text);
+    setModalActive(false);
+    inputRef.current.value = "";
+  }, []);
+
+  return (
+    <>
+      <Modal
+        isActive={isModalActive}
+        onRequestClose={() => setModalActive(false)}
+      >
+        <div className="flex h-full justify-center items-center">
+          <form
+            onSubmit={handleSubmitForm}
+            className="bg-gray-200 dark:bg-slate-900 rounded-sm p-4 flex flex-col items-center gap-2"
+          >
+            <h2 className="text-2xl py-4">Create Group</h2>
+            <input
+              type="text"
+              className="text-lg border-2 border-gray-400  rounded-md outline-none p-1 active:border-gray-500"
+              placeholder="Title"
+              ref={inputRef}
+            />
+            <div className="flex justify-evenly text-gray-50 text-lg gap-4 py-2">
+              <button
+                type="button"
+                className="rounded-sm cursor-pointer bg-red-500 hover:bg-red-600 transition-all px-4 py-2"
+                onClick={() => setModalActive(false)}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="rounded-sm cursor-pointer bg-green-500 hover:bg-green-600 transition-all px-4 py-2"
+              >
+                Create
+              </button>
+            </div>
+          </form>
+        </div>
+      </Modal>
+      <AddItem onClick={() => setModalActive(true)} />
+    </>
   );
 };
 
