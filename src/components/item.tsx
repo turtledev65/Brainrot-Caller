@@ -1,6 +1,4 @@
 import { IoMdAdd as AddIcon } from "react-icons/io";
-import Modal from "./modal";
-import { FormEvent, useCallback, useState, useRef } from "react";
 
 type ItemProps = {
   name: string;
@@ -12,7 +10,7 @@ export const Item = ({ name, onClick }: ItemProps) => {
       onClick={onClick}
       className="bg-gray-300 dark:bg-slate-900 dark:hover:bg-slate-950 dark:text-gray-50 h-40 cursor-pointer hover:bg-gray-400 transition-colors text-gray-800 rounded-sm p-4 flex justify-center items-center"
     >
-      <p className="text-lg">{name}</p>
+      <p className="text-lg text-center">{name}</p>
     </div>
   );
 };

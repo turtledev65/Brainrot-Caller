@@ -30,7 +30,7 @@ const Call = ({
         {icon && (
           <img
             src={icon}
-            className="w-sm object-cover bg-white rounded-full p-2"
+            className="w-sm object-cover aspect-square bg-white rounded-full p-2"
           />
         )}
         <p className="text-4xl font-bold shadow-2x">{name}</p>
