@@ -63,6 +63,7 @@ const AddCallItem = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const iconInputRef = useRef<HTMLInputElement>(null);
   const backgroundInputRef = useRef<HTMLInputElement>(null);
+  const audioInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmitForm = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
@@ -75,8 +76,9 @@ const AddCallItem = () => {
 
       const icon = iconInputRef.current?.value.trim();
       const background = backgroundInputRef.current?.value.trim();
+      const audio = audioInputRef.current?.value.trim();
 
-      addCall(selectedGroup.name, { name, icon, background });
+      addCall(selectedGroup.name, { name, icon, background, audio });
       setModalActive(false);
       nameInputRef.current.value = "";
     },
@@ -111,6 +113,12 @@ const AddCallItem = () => {
                 className="text-lg border-2 border-gray-400  rounded-md outline-none p-1 active:border-gray-500"
                 placeholder="Background URL"
                 ref={backgroundInputRef}
+              />
+              <input
+                type="url"
+                className="text-lg border-2 border-gray-400  rounded-md outline-none p-1 active:border-gray-500"
+                placeholder="Audio URL"
+                ref={audioInputRef}
               />
             </div>
             <div className="flex justify-evenly mt-4 text-gray-50 text-lg gap-4 py-2">
@@ -212,6 +220,7 @@ const CallScreen = () => {
       name={selectedCall.name}
       icon={selectedCall.icon}
       background={selectedCall.background}
+      audio={selectedCall.audio}
     />
   );
 };

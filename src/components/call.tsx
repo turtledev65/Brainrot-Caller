@@ -15,9 +15,11 @@ const Call = ({
   name,
   icon,
   background,
+  audio,
 }: Props) => {
   return (
     <div className="absolute bg-black inset-0 flex flex-col text-white">
+      {audio && <audio src={audio} loop autoPlay />}
       {background && (
         <div
           className="absolute inset-0 bg-pink bg-no-repeat bg-cover bg-center"
