@@ -31,7 +31,7 @@ const Call = ({
             className="w-sm object-cover bg-white rounded-full p-2"
           />
         )}
-        <p className="text-3xl">{name}</p>
+        <p className="text-4xl font-bold shadow-2x">{name}</p>
       </div>
       <div className="flex z-10 justify-around py-12">
         <button
