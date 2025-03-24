@@ -59,7 +59,10 @@ const GroupGrid = () => {
 const AddCallItem = () => {
   const { selectedGroup, addCall } = useContext(GroupsContext);
   const [isModalActive, setModalActive] = useState(false);
+
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const iconInputRef = useRef<HTMLInputElement>(null);
+  const backgroundInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmitForm = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
@@ -70,7 +73,10 @@ const AddCallItem = () => {
       const name = nameInputRef.current.value.trim();
       if (!name || name.length === 0) return;
 
-      addCall(selectedGroup.name, { name });
+      const icon = iconInputRef.current?.value.trim();
+      const background = backgroundInputRef.current?.value.trim();
+
+      addCall(selectedGroup.name, { name, icon, background });
       setModalActive(false);
       nameInputRef.current.value = "";
     },
@@ -86,13 +92,27 @@ const AddCallItem = () => {
             className="bg-white dark:bg-slate-900 rounded-sm p-4 gap-2"
           >
             <h2 className="text-2xl py-4 mb-4">Create Call</h2>
-            <input
-              type="text"
-              className="text-lg border-2 border-gray-400  rounded-md outline-none p-1 active:border-gray-500"
-              placeholder="Name"
-              required
-              ref={nameInputRef}
-            />
+            <div className="flex flex-col gap-2">
+              <input
+                type="text"
+                className="text-lg border-2 border-gray-400  rounded-md outline-none p-1 active:border-gray-500"
+                placeholder="Name"
+                required
+                ref={nameInputRef}
+              />
+              <input
+                type="url"
+                className="text-lg border-2 border-gray-400  rounded-md outline-none p-1 active:border-gray-500"
+                placeholder="Icon URL"
+                ref={iconInputRef}
+              />
+              <input
+                type="url"
+                className="text-lg border-2 border-gray-400  rounded-md outline-none p-1 active:border-gray-500"
+                placeholder="Background URL"
+                ref={backgroundInputRef}
+              />
+            </div>
             <div className="flex justify-evenly mt-4 text-gray-50 text-lg gap-4 py-2">
               <button
                 type="button"
