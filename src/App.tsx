@@ -1,4 +1,11 @@
-import { FormEvent, useCallback, useContext, useRef, useState } from "react";
+import {
+  FormEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Navbar from "./components/navbar";
 import Providers from "./providers";
 import { GroupsContext } from "./providers/groups-providers";
@@ -63,6 +70,10 @@ const AddGroupItem = () => {
     setModalActive(false);
     inputRef.current.value = "";
   }, []);
+
+  useEffect(() => {
+    if (isModalActive) inputRef.current?.focus();
+  }, [isModalActive]);
 
   return (
     <>
