@@ -57,7 +57,6 @@ const CallScreen = () => {
   if (selectedCall === null) return;
   return (
     <Call
-      isCalling
       onRejectCall={() => selectCall(null)}
       name={selectedCall.name}
       icon={selectedCall.icon}

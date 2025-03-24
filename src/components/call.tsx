@@ -5,13 +5,12 @@ import {
 import { Caller } from "../types";
 
 type Props = Caller & {
-  isCalling: boolean;
   onRejectCall?: () => void;
   onAnswerCall?: () => void;
 };
 
-const Call = ({ isCalling, onRejectCall, onAnswerCall, name, icon }: Props) => {
-  return !isCalling ? null : (
+const Call = ({ onRejectCall, onAnswerCall, name, icon }: Props) => {
+  return (
     <div className="absolute bg-black inset-0 flex flex-col text-white">
       <div className="flex-1 flex flex-col gap-4 justify-center items-center">
         {icon && (
